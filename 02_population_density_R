@@ -1,10 +1,12 @@
 #Spatial Ecology in R 16/10 
 
-# A package is needed for point pattern analysis
-install.packages("spatstat")
-library(spatstat)
-# Code related to population ecology
+#02 population density 
 
+# A package is needed for point pattern analysis
+#install.packages("spatstat")
+library(spatstat)
+
+# Code related to population ecology
 
 # let's use the bei data:
 # data description:
@@ -45,16 +47,21 @@ plot(bei)
 points(bei, cex=.2)
 points(bei, col= "green")
 
+#Day 2- 17/10
+# Changin colors to maps
+# search your browser for "colors in R" 
+# http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf
 cl <- colorRampPalette(c("black", "red", "orange", "yellow"))(100)
 plot(densitymap, col=cl)
 
 cl <- colorRampPalette(c("black", "red", "orange", "yellow"))(4)
 plot(densitymap, col=cl)
 
-clnew <- colorRampPalette(c("dark blue", "blue", "light blue"))(100)
+clnew <- colorRampPalette(c("chocolate", "blue", "chartreuse"))(100)
 plot(densitymap, col=clnew)
 
 bei.extra
+
 #elevation <- bei.extra[[1]]
 #1° elevation
 #2° gradient
@@ -66,14 +73,14 @@ plot(elev)
 plot(elevation2)
 
 
-# multiframe with basically one row on graf and two colonne 
-#the function is par 
-
-#c = concatenate elements, it's different of par 
+# Make a multiframe with basically one row on graf and two columns 
+#the function is "par"
+#NB : c = concatenate elements, it's different of par 
 par(mfrow=c(1,2))
 plot(densitymap)
 plot(elev)
 
+# With elevation2
 par(mfrow=c(1,2))
 plot(densitymap)
 plot(elevation2)
@@ -83,7 +90,7 @@ par(mfrow=c(2,1))
 plot(densitymap)
 plot(elevation2)
 
-#one frined to clear graphs
+
 dev.off()
 
 plot(elevation2)
@@ -97,24 +104,30 @@ plot(bei)
 plot(densitymap)
 plot(elev)
 
-#Change colours to maps 
+# Changin colors to maps
 #funtion it's ColorRampPalette
-#3 sfumature 
-cl <- colorRampPalette(c("black","blue","red"))(3)
+cl <- colorRampPalette(c("red", "orange", "yellow"))(3)
 plot(densitymap, col=cl)
+#3 shades
 
-#e qui 100 sfumature 
-# Exercise: change the colors ramp palette using different colors
-cl <- colorRampPalette(c("black", "purple1", "orange", "palegreen"))(100)
+cl <- colorRampPalette(c("red", "orange", "yellow"))(10)
 plot(densitymap, col=cl)
+#10 shades
 
-#per le persone daltoniche è un problema l'arancione e lo posso cambiare 
-#con il blu cosi le persone daltoniche non hanno problemi a vedere la mappa ora 
-cln <- colorRampPalette(c("black", "purple1", "orange", "palegreen"))(100)
+cl <- colorRampPalette(c("red", "orange", "yellow"))(100)
 plot(densitymap, col=cl)
+#100 shades
+
+# Exercise: change the color ramp palette using different colors
+#People with colour blindness have an altered perception of certain colours 
+#such as red, green and blue.
+#So in maps we try not to use certain colors, so everyone 
+#can read and interpret maps and charts.
+cln <- colorRampPalette(c("black", "purple1", "darkturquoise", "deeppink"))(100)
+plot(densitymap, col=cln)
 
 
-#Exercise plut a multiframe ecc 
+# Exercise: build a multiframe and plot the densitymap with two different color ramp palettes one beside the other
 par(mfrow=c(2,1))
 cln <- colorRampPalette(c("black", "purple1", "orange", "palegreen"))(100)
 plot(densitymap, col = cln)
@@ -123,4 +136,7 @@ clg <- colorRampPalette(c("black", "purple1", "blue", "palegreen"))(100)
 plot(densitymap, col = clg)
 
 dev.off()
+
+
+
 
