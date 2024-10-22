@@ -1,4 +1,5 @@
 #03 population distribution on R 
+#03 population distribution on R 
 #17/10
 # Why populations disperse over the landscape in a certain manner?
 
@@ -8,30 +9,32 @@ library(terra)
 
 file <- system.file("external/species.shp", package="sdm")
 
-#Spatvector è una funzione con cui trasformiamo uno shp in un file che R 
-#può leggere ....
+#Spatvector is a function by which we transform a shapefile(shp) into a file that R can read 
 rana <- vect(file)
+rana #features
+
 rana$Occurrence
-rana
+
 plot(rana)
 
 #for view species absence (0) or species presence (1)
-#In Sequel: select * , from rana and where Occurance = 1 
-#in R = si indica con == 
-#in R ; ....
+#In Sequel: select * , from frog and where Occurrence = 1 
+#in R = is indicated by == 
+#in R ; is used to separate instructions
 
-#distribuzione delle rane nello spazio e ogni singolo punto è una coppia di punti
-#ogni punto è un vettore praticamente 
+
+#Distribution of frogs in space and each single point is a pair of points
+#each point is a vector  
 
 # Selecting presences
-#for presence put 1 
+#for presences put 1 
 pres <- rana[rana$Occurrence==1,]
 plot(pres)
 pres #for the info about this dataset 
 pres$Occurrence
 
-# Exercise: select absence and call them abse
-#for ansent put 0 
+# Exercise: select absences and call them abse
+#for absences put 0 
 abse <- rana[rana$Occurrence==0,]
 plot(abse)
 abse #for the info about this dataset 
@@ -42,7 +45,7 @@ par(mfrow=c(1,2))
 plot(pres)
 plot(abse)
 
-
+# Exercise: plot in a multiframe presences on top of absences
 par(mfrow=c(2,1))
 plot(pres)
 plot(abse)
@@ -53,8 +56,8 @@ dev.off()
 plot(pres, col="blue")
 points(abse, col="palegreen")
 
-
-plot(pres, col="blue", pch=19, cex=2) #per ingrandire i punti
+#plot the presences in blue together with absences in red
+plot(pres, col="blue", pch=19, cex=2) #for the largest points
 points(abse, col="red",pch=19, cex=2)
 dev.off()
 
@@ -81,40 +84,4 @@ cl <- colorRampPalette(c("palegreen", "purple1", "hotpink"))(100)
 plot(elevmap, col=cl)
 points(pres, pch=19)
 
-# temperature predictor
-temp <- system.file("external/temperature.asc", package="sdm") 
-tempmap <- rast(temp) # from terra package
-plot(tempmap)
-points(pres, cex=.5)
 
-# exrcise: do the same with vegetation cover
-vege <- system.file("external/vegetation.asc", package="sdm") 
-vegemap <- rast(vege) # from terra package
-plot(vegemap)
-points(pres, cex=.5)
-
-# exrcise: do the same with vegetation cover
-prec <- system.file("external/precipitation.asc", package="sdm") 
-precmap <- rast(prec) # from terra package
-plot(precmap)
-points(pres, cex=.5)
-
-# final multiframe
-
-par(mfrow=c(2,2))
-
-# elev
-plot(elevmap)
-points(pres, cex=.5)
-
-# temp
-plot(tempmap)
-points(pres, cex=.5)
-
-# vege
-plot(vegemap)
-points(pres, cex=.5)
-
-# prec
-plot(precmap)
-points(pres, cex=.5)
