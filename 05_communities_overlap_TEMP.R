@@ -43,3 +43,10 @@ densityPlot(timemacaque, rug=TRUE)
 
 
 overlapPlot(tigertime, timemacaque)
+
+#----SQL
+macaque <- kerinci[kerinci$Sps=="macaque",]
+summary(macaque)
+
+nomacaque <- kerinci[kerinci$Sps!="macaque",]
+summary(nomacaque)
