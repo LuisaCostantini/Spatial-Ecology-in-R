@@ -16,7 +16,7 @@ im.plotRGB(sent, r=1, g=2, b=3)
 # band 3 = green #rock
 
 im.plotRGB(sent, r=2, g=1, b=3) 
-im.plotRGB(sent, r=2, g=3, b=1) #il giallo ci aiuta a cercaRE INFO 
+im.plotRGB(sent, r=2, g=3, b=1) #yellow helps us to search info
 dev.off()
 
 #Measuring standard deviation 
