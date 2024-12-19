@@ -6,6 +6,7 @@ library(terra)
 library(imageRy)
 library(ggplot2)
 library(patchwork)
+packageVersion("ggplot2")
 
 im.list()
 
@@ -27,13 +28,13 @@ m2006 <- im.import("matogrosso_ast_2006209_lrg.jpg")
 
 m1992c <- im.classify(m1992, num_clusters=2)                    
 plot(m1992c)
-# classes: 
+#Classes: 
 #human= 2 related areas and water ; 
 #forest= 1 
 
 m2006c <- im.classify(m2006, num_clusters=2)
 plot(m2006c)
-# classes: 
+#Classes: 
 #forest= 2; 
 #human= 1 related areas and water
 
@@ -70,19 +71,23 @@ y2006 <- c(45, 55)
 
 tabout <- data.frame(class, y1992, y2006)
 tabout
-
+str(tabout)
+summary(tabout)
 dev.off()
 
-# Final graph
+# Final graph with patchwork
 p1 <- ggplot(tabout, aes(x=class, y=y1992, color=class)) + geom_bar(stat="identity", fill="white")
-
+print(p1)
 p2 <- ggplot(tabout, aes(x=class, y=y2006, color=class)) + geom_bar(stat="identity", fill="white")
-p1+p2
-
+print(p2)
+p1 + p2
+print(p1 + p2)
 #We Use patchwork per comporre più grafici in un unico grafico 
 
 # final output, rescaled
 p1 <- ggplot(tabout, aes(x=class, y=y1992, color=class)) + geom_bar(stat="identity", fill="white") + ylim(c(0,100))
+print(p1)
 p2 <- ggplot(tabout, aes(x=class, y=y2006, color=class)) + geom_bar(stat="identity", fill="white") + ylim(c(0,100))
+print(p2)
 p1 + p2
 p1 / p2
